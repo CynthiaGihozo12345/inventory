@@ -10,7 +10,7 @@ class StockOut extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['stock_id', 'quantity_out', 'price'];
+    protected $fillable = ['product_id', 'quantity', 'price'];
 
     /**
      * Get the stock record associated with this stock-out.
@@ -19,4 +19,9 @@ class StockOut extends Model
     {
         return $this->belongsTo(products::class);
     }
+    public function product()
+{
+    return $this->belongsTo(Products::class);
+}
+
 }

@@ -16,4 +16,5 @@ class StockIn extends Model
     {
         return $this->belongsTo(products::class);
     }
+    
 }

@@ -12,14 +12,22 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('stock_outs', function (Blueprint $table) {
-            $table->stockout_id();
-            $table->foreignId('product_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->id(); // Auto-incrementing primary key for the stock_outs table
+            
+            // Explicit foreign key definition
+            $table->unsignedBigInteger('product_id');
+            $table->foreign('product_id') // Defining the foreign key
+                ->references('id') // The 'id' column of the 'products' table
+                ->on('products') // The table being referenced
+                ->onDelete('cascade') // If a product is deleted, all related stock_outs will be deleted
+                ->onUpdate('cascade'); // If the product id is updated, it will also update here
+    
             $table->integer('quantity');
             $table->decimal('price', 8, 2);
-;           $table->timestamps();
-        
+            $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.

@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('stock_ins', function (Blueprint $table) {
-            $table->bigIncrements('stockin_id'); // Creates an auto-incrementing primary key
+            $table->id(); // Creates an auto-incrementing primary key
             $table->unsignedBigInteger('product_id'); // Explicitly setting the type of the foreign key column
             $table->foreign('product_id')  // Defining the foreign key constraint
-                  ->references('product_id')     // Referencing the 'id' column of the 'products' table
+                  ->references('id')     // Referencing the 'id' column of the 'products' table
                   ->on('products')       // Ensuring the foreign key points to the 'products' table
                   ->onDelete('cascade')  // Deletes related stock_ins if a product is deleted
                   ->onUpdate('cascade'); // Updates related stock_ins if the product is updated
